@@ -1,0 +1,93 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="kpi_tvcv_form">
+            <field name="name">kpi_tvcv_form</field>
+            <field name="model">kpi.tvcv</field>
+            <field name="arch" type="xml">
+                <form string="TVCV">
+                    <header>
+                        <!-- <button name="action_draft" type="object" string="Bản Thảo" class="btn-primary" states="begin,cancel" />
+                        <button name="action_begin" type="object" class="btn-primary" string="Khởi Động" states="draft,working" />
+                        <button name="action_working" type="object" class="btn-primary" string="Đang Hoạt Động" states="begin" />
+                        <button name="action_fail" type="object" class="btn-primary" string="Hư hỏng" states="working" />
+                        <button name="action_cancel" type="object" class="btn-primary" string="Xóa" states="draft,begin,working,fail" />
+                        <field name="state" widget="statusbar" statusbar_visible="draft,begin,working,fail,cancel" /> -->
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" />
+                                <field name="code" />
+                                <field name="cate_id" />
+                            </group>
+                            <group>
+                                <field name="dieu_chinh" />
+                                <field name="note" />
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="activity_ids" widget="mail_activity" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="kpi_tvcv_tree">
+            <field name="name">kpi_tvcv_tree</field>
+            <field name="model">kpi.tvcv</field>
+            <field name="arch" type="xml">
+                <tree string="Product Template">
+                  <field name="name" />
+                  <field name="code" />
+                  <field name="cate_id" />
+                  <field name="dieu_chinh" />
+                  <field name="note" />
+                </tree>
+            </field>
+        </record>
+        <record id="template_search_new" model="ir.ui.view">
+            <field name="name">template_search_new</field>
+            <field name="model">kpi.tvcv</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name" />
+                    <field name="code" />
+                    <field name="dieu_chinh" />
+                    <field name="note" />
+                    <separator />
+                    <!-- <filter name="danxe" string="Dán xe" domain="[('loaiphuluc','=','danxe')]"/>
+					<filter name="lapframe" string="Lắp Frame" domain="[('loaiphuluc','=','lapframe')]"/> -->
+                    <group expand="0" string="Group By...">
+                        <filter name="name" string="Tên TVCV" context="{'group_by':'name'}" />
+                        <filter name="code" string="Mã công việc" context="{'group_by':'code'}" />
+                        <filter name="dieu_chinh" string="Điều chỉnh" context="{'group_by':'dieu_chinh'}" />
+                        <filter name="note" string="Ghi chú" context="{'group_by':'note'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="tvcv_act">
+            <field name="name">TVCV</field>
+            <field name="res_model">kpi.tvcv</field>
+            <field name="view_mode">tree,form</field>
+            <!-- <field name="view_id" ref="kpi_tvcv_tree"></field>
+            <field name="search_view_id" ref="template_search_new" /> -->
+        </record>
+        <!-- <record id="form_new_action_new" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence" />
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="kpi_tvcv_form" />
+            <field name="act_window_id" ref="TVCV_act" />
+        </record>
+        <record id="tree_new_action_new" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence" />
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="kpi_tvcv_tree" />
+            <field name="act_window_id" ref="TVCV_act" />
+        </record> -->
+        <menuitem id="kpi_menu" string="KPI" name="kpi" />
+        <menuitem id="tvcv_menu" string="TVCV" name="TVCV" parent="kpi_menu" action="tvcv_act" />
+    </data>
+</odoo>

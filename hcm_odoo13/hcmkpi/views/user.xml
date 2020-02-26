@@ -1,0 +1,27 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_users_form_inherit">
+            <field name="name">view_users_form_inherit</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <field name="tz" position="after">
+                    <field name="user_department_id"/>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_users_inherit">
+            <field name="name">view_users_tree_inherit</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_tree"/>
+            <field name="arch" type="xml">
+                <field name="login" position="after">
+                    <field name="user_department_id"/>
+                </field>
+            </field>
+        </record>
+
+        
+    </data>
+</odoo>

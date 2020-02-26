@@ -1,0 +1,147 @@
+<odoo>
+    <data>
+        <record id="monthly_work_tree" model="ir.ui.view">
+            <field name="name">monthly.work.tree</field>
+            <field name="model">monthly.work</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="user_id" />
+                    <field name="department_id" />
+                    <field name="month" />
+                    <field name="year" />
+                    <field name="diem_tong_ket_thang" />
+                    <field name="diem_tong_ket_thang_station" />
+                    <field name="diem_tong_ket_thang_council" />
+                    <field name="diem_tong_ket_thang_result" />
+                </tree>
+            </field>
+        </record>
+        <record id="monthly_work_form" model="ir.ui.view">
+            <field name="name">monthly.work.form</field>
+            <field name="model">monthly.work</field>
+            <field name="arch" type="xml">
+                <form nam="monthlywork_form">
+                    <sheet>
+                            <group>
+                                <!-- <field name="user_id" readonly="1" force_save="1" /> -->
+                                <field name="user_id" />
+                                <field name="department_id" />
+                                <field name="month" />
+                                <field name="year" />
+                            </group>
+                            <group col="4">
+                                <group name="sale_total" >
+                                    <field name="diem_co_dinh" />
+                                    <field name="diem_dot_xuat" />
+                                    <field name="diem_tinh_than" />
+                                    <!-- <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                        <label for="diem_tong_ket_thang" />
+                                    </div> -->
+                                    <field name="diem_tong_ket_thang"  class="oe_subtotal_footer_separator" />
+                                </group>
+                                <group name="sale_total2" >
+                                    <field name="diem_co_dinh_station" />
+                                    <field name="diem_dot_xuat_station" />
+                                    <field name="diem_tinh_than_station" />
+                                    <!-- <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                        <label for="diem_tong_ket_thang" />
+                                    </div> -->
+                                    <field name="diem_tong_ket_thang_station" class="oe_subtotal_footer_separator" />
+                                </group>
+                                <group name="sale_total3" >
+                                    <field name="diem_co_dinh_council" />
+                                    <field name="diem_dot_xuat_council" />
+                                    <field name="diem_tinh_than_council" />
+                                    <field name="diem_tong_ket_thang_council"  class="oe_subtotal_footer_separator" />
+                                </group>
+								<group name="sale_total4" >
+                                    <field name="diem_co_dinh_result" />
+                                    <field name="diem_dot_xuat_result" />
+									<field name="diem_tinh_than_result" />
+                                    <field name="diem_tong_ket_thang_result"  class="oe_subtotal_footer_separator" />
+                                </group>
+                            </group>
+                        <notebook>
+                            <page string="A.Các nhiệm vụ trọng tâm theo bản MTCV">
+                                <field name="dk_cvi_ids" string="Công việc Trọng tâm trong tháng" context="{'default_dx_hay_dk':'dk'}">
+                                    <tree editable="bottom">
+                                        <field name="tvcv_id"  />
+                                        <field name="code"  />
+                                        <field name="dx_hay_dk" />
+                                        <field name="dieu_chinh" />
+                                        <field name="qty" />
+                                        <field name="personal_mark" />
+                                        <field name="station_evaluation" readonly="0" force_save="1" />
+                                        <field name="council_evaluation" readonly="0" force_save="1" />
+                                        <field name="result_mark" />
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="B.Các nhiệm vụ/mục tiêu giao bổ sung">
+                                <field name="dx_cvi_ids" string="Công việc Trọng tâm trong tháng" context="{'default_dx_hay_dk':'dx'}">
+                                    <tree editable="bottom">
+                                        <field name="tvcv_id" />
+                                        <field name="code"  />
+                                        <field name="dx_hay_dk" />
+                                        <field name="dieu_chinh" />
+                                        <field name="qty" />
+                                        <field name="personal_mark" />
+                                        <field name="station_evaluation" readonly="0" force_save="1" />
+                                        <field name="council_evaluation" readonly="0" force_save="1" />
+                                        <field name="result_mark" />
+                                    </tree>
+                                </field>
+                            </page>
+							<page string="C.Tinh thần và thái độ làm việc">
+                                <field name="tinh_than_cvi_ids" context="{'default_dx_hay_dk':'tinh_than'}">
+                                    <tree editable="bottom">
+                                        <field name="tvcv_id"  domain="[('cate_id.name','=','c')]"/>
+                                        <field name="code"  />
+                                        <field name="dx_hay_dk" context="{'default_dx_hay_dk':'tt'}"/>
+                                        <field name="dieu_chinh" />
+                                        <field name="qty" />
+                                        <field name="personal_mark" />
+                                        <field name="station_evaluation" readonly="0" force_save="1" />
+                                        <field name="council_evaluation" readonly="0" force_save="1" />
+                                        <field name="result_mark" />
+                                    </tree>
+                                </field>
+                            </page>
+
+
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="monthly_work_search" model="ir.ui.view">
+            <field name="name">monthly_work_search</field>
+            <field name="model">monthly.work</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="user_id" />
+                    <field name="month" />
+                    <field name="year" />
+                    <separator />
+                    <filter name="this month" string="CV Tháng này" domain="[('month','=',(context_today()).strftime('%m')), ('year','=',(context_today()).strftime('%Y'))]" help="Chọn tháng này" />
+                    <filter name="last month" string="CV Tháng trước" domain="[('month','=',(context_today()+relativedelta(months=-1)).strftime('%m')), ('year','=',(context_today() +relativedelta(months=-1)).strftime('%Y'))]" help="Chọn tháng này" />
+                    <!-- <filter name="this month" string="CV Tháng này" domain="[('month','=',(context_today()+relativedelta(months=1)).strftime('%Y-%m-01')), ('ngay_bat_dau','&gt;=',time.strftime('%Y-%m-01'))]" help="Chọn tháng này" /> -->
+
+                    <!-- <filter name="danxe" string="Dán xe" domain="[('loaiphuluc','=','danxe')]"/>
+					<filter name="lapframe" string="Lắp Frame" domain="[('loaiphuluc','=','lapframe')]"/> -->
+                    <group expand="0" string="Group By...">
+                        <filter name="user_id"  context="{'group_by':'user_id'}" />
+                        <filter name="month"  context="{'group_by':'month'}" />
+                        <filter name="year"  context="{'group_by':'year'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="monthly_work_action" model="ir.actions.act_window">
+            <field name="name">Công việc hằng tháng</field>
+            <field name="res_model">monthly.work</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="month_work_menu" parent="kpi_menu" action="monthly_work_action" sequence="5" />
+    </data>
+</odoo>

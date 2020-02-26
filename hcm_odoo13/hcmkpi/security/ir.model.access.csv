@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_kpi_tvcv_manager,access.kpi.tvcv.manager,model_kpi_tvcv,hcmkpi.group_kpi_manager,1,1,1,1
+access_kpi_tvcv_user,access.kpi.tvcv.user,model_kpi_tvcv,hcmkpi.group_kpi_user,1,1,1,0
+access_kpi_tvcvcate_manager,access.kpi.tvcvcate.manager,model_kpi_tvcvcate,hcmkpi.group_kpi_manager,1,1,1,1
+access_kpi_tvcvcate_user,access.kpi.tvcvcate.user,model_kpi_tvcvcate,hcmkpi.group_kpi_user,1,1,1,0
+access_monthly_work_manager,access.monthly.work.manager,model_monthly_work,hcmkpi.group_kpi_manager,1,1,1,1
+access_monthly_work_user,access.monthly.work.user,model_monthly_work,hcmkpi.group_kpi_user,1,1,1,0
+access_monthly_work_item_manager,access.monthly.work.item.manager,model_monthly_work_item,hcmkpi.group_kpi_manager,1,1,1,1
+access_monthly_work_item_user,access.monthly.work.item.user,model_monthly_work_item,hcmkpi.group_kpi_user,1,1,1,0
+access_user_department_manager,access.user.department.manager,model_user_department,hcmkpi.group_kpi_manager,1,1,1,1
+access_user_department_user,access.user.department.user,model_user_department,hcmkpi.group_kpi_user,1,1,1,0

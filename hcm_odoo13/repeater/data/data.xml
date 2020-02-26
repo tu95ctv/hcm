@@ -1,0 +1,74 @@
+<odoo>
+    <data>
+        <record id="ir_mail_server_google" model="ir.mail_server" forcecreate="0">
+            <field name="name">google outgoing mail</field>
+            <field name="smtp_host">smtp.gmail.com</field>
+            <field eval="465" name="smtp_port"/>
+            <field eval="1" name="sequence"/>
+            <field name="smtp_encryption">ssl</field>
+            <field name="smtp_user">ductu8711@gmail.com</field>
+            <field name="smtp_pass">qmucilbqjhmfbyqa</field>
+        </record>
+
+          <report 
+            id="action_report_license_certifcate"
+            string="License Certificate Report"
+            model="repeater.repeater" 
+            report_type="qweb-pdf"
+            file="repeater.haha" 
+            name="repeater.licensecertificate_report"
+            print_report_name="'kakaka%s'%object.name.replace(' ','_')"
+        />
+
+
+
+        <record id="repeater_change_state_mail_template" model="mail.template">
+           <field name="name">Thay đổi trạng thái của Repeater ở địa chỉ ${object.address} sang trạng thái ${object.state}</field>
+           <field name="email_from">Repeator@no-reply.com</field>
+           <field name="subject">Thay đổi trạng thái của ${object.name} sang trạng thái ${object.state}</field>
+           <field name="email_to"></field>
+           <field name="model_id" ref="model_repeater_repeater"/> 
+           <!-- <field name="report_template" ref="action_report_license_certifcate"/> -->
+            <field name="report_template"></field>
+
+            <field name="report_name">thay_doi_state_repeator</field>
+          	<field name="auto_delete" eval="False"/>
+            <field name="lang">${object.env.user.lang}</field>
+            <field name="body_html">Thay đổi trạng thái của ${object.name} sang trạng thái ${object.state}</field>
+           <!-- <field name="body_html"><![CDATA[
+            <![CDATA[
+            <div>
+            <p>
+           		 This content is overwrited by python code
+           		 </p>
+           		 </div>
+            ]]>
+            </field> -->
+        </record>
+
+       
+
+    <template id="license_document">
+        <t t-call="web.external_layout">
+            <p style="text-align: center;font-weight:bold;font-size:30px;margin:50px 0px 40px 0px;">
+            LICENSE CERTIFICATE REPORT
+         </p>
+        </t>
+    </template>
+   
+   
+    <template id="licensecertificate_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="repeater.license_document" />
+            </t>
+        </t>
+    </template>
+
+
+
+
+    </data>
+
+
+</odoo>
