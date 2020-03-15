@@ -1,0 +1,10 @@
+<odoo>
+    
+    <record model="ir.actions.act_window" id="repeater_department_act">
+            <field name="name">Department</field>
+            <field name="res_model">repeater.department</field>
+            <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="hcm_department_menu" name="Đơn vị của NET2" parent="configuration_menu" action="repeater_department_act" sequence="10" groups="base.group_erp_manager"/>
+
+</odoo>

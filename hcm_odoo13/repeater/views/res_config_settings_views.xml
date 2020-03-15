@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="res_config_settings_view_form" model="ir.ui.view">
+            <field name="name">res.config.settings.repeater</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="30"/>
+            <field name="inherit_id" ref="base.res_config_settings_view_form" />
+            <field name="arch" type="xml">
+               <xpath expr="//div[hasclass('settings')]" position="inside">
+                    <div class="app_settings_block" data-string="repeater" string="repeater" data-key="repeater" >
+                        <h2>Cấu hình gửi mail</h2>
+                        <div class="row mt16 o_settings_container"> 
+                            <div class="col-12 col-lg-6 o_setting_box" >
+                                <div class="o_setting_right_pane">
+                                    <span class="o_form_label">Thêm người nhận</span>
+                                    <div class="text-muted">
+                                        Mail tự động sẽ được gửi thêm cho người này
+                                    </div>
+                                    <div class="row mt16">
+                                        <label for="to_email_repeater_change_id" string="Người nhận" class="col-lg-4 o_light_label"/>
+                                        <field name="to_email_repeater_change_id" class="oe_inline"/>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="is_send_mail_change_repeater"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="is_send_mail_change_repeater"/>
+                                    <div class="text-muted">
+                                        Kích hoạt gửi mail khi có thay đổi trạng thái repeater
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+
+                        
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="action_repeater_config_settings" model="ir.actions.act_window">
+            <field name="name">Thiết Lập</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+            <field name="context">{'module' : 'repeater'}</field>
+        </record>
+
+        <menuitem id="menu_repeater_general_settings"
+            name="Thiết Lập"
+            parent="configuration_menu"
+            sequence="0"
+            action="action_repeater_config_settings"
+            groups="base.group_system"/>
+
+
+
+
+       
+    </data>
+</odoo>

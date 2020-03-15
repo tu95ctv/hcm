@@ -18,6 +18,9 @@
            <field name="subject">Thay đổi trạng thái của ${object.name} sang trạng thái ${object.state}</field>
            <field name="email_to"></field>
            <field name="model_id" ref="model_repeater_repeater"/> 
+           <!-- <field name="report_template" ref="action_report_license_certifcate"/> -->
+            <field name="report_template"></field>
+
             <field name="report_name">thay_doi_state_repeator</field>
           	<field name="auto_delete" eval="False"/>
             <field name="lang">${object.env.user.lang}</field>
@@ -44,41 +47,17 @@
         <field name="binding_model_id" ref="repeater.model_repeater_repeater"/>
         <field name="code">records.move_field_department()
         </field>
-    </record>-->
-
-    <record id="action_set_confirm_repeater" model="ir.actions.server">
-        <field name="name">Thiết lập trạng thái Confirm cho Repeaterr</field>
-        <field name="type">ir.actions.server</field>
-        <field name="state">code</field>
-        <field name="model_id" ref="repeater.model_repeater_repeater"/>
-        <field name="binding_model_id" ref="repeater.model_repeater_repeater"/>
-        <field name="code">records.action_confirm()
-        </field>
-    </record> 
-
-    <record id="action_set_cancel_repeater" model="ir.actions.server">
-        <field name="name">Thiết lập trạng thái Cancel cho Repeater</field>
-        <field name="type">ir.actions.server</field>
-        <field name="state">code</field>
-        <field name="model_id" ref="repeater.model_repeater_repeater"/>
-        <field name="binding_model_id" ref="repeater.model_repeater_repeater"/>
-        <field name="code">records.action_cancel()
-        </field>
-        <field name="groups_id" eval="[(4,ref('base.group_system'))]" />
-
-    </record> 
-
-    <record id="ir_repeater_test_code" model="ir.cron">
-        <field name="name">ir_repeater_test_code</field>
-        <field name="model_id" ref="repeater.model_repeater_repeater"/>
-        <!-- <field name="user_id" ref="base.user_root"/> -->
-        <field name="state">code</field>
-        <field name="code">model.test_code()</field>
-        <field name="interval_number">1</field>
-        <field name="interval_type">hours</field>
-        <field name="numbercall">-1</field>
-        <field name="doall" eval="False"/>
     </record>
+
+    <record id="action_set_working_repeater" model="ir.actions.server">
+        <field name="name">action_set_working_repeater</field>
+        <field name="type">ir.actions.server</field>
+        <field name="state">code</field>
+        <field name="model_id" ref="repeater.model_repeater_repeater"/>
+        <field name="binding_model_id" ref="repeater.model_repeater_repeater"/>
+        <field name="code">records.filtered(lambda r: not r.state).action_working()
+        </field>
+    </record> -->
 
 
 

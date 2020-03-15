@@ -24,7 +24,7 @@
             <field name="groups_id" eval="[(4,ref('group_repeater_user'))]"/>
         </record> 
 
-        <record id="repeater_unlink" model="ir.rule">
+        <!-- <record id="repeater_unlink" model="ir.rule">
             <field name="name">Repeater Unlink</field>
             <field name="model_id" ref="repeater.model_repeater_repeater"/>
             <field name="domain_force">[('state','=','cancel')]</field>
@@ -32,30 +32,22 @@
             <field name="perm_write" eval="0"/>
             <field name="perm_read" eval="0"/>
             <field name="perm_create" eval="0"/>
-            <field name="groups" eval="[(4, ref('group_repeater_user'))]"/>
-        </record>
+        </record> -->
 
-        <record id="repeater_unlink" model="ir.rule">
-            <field name="name">Repeater Unlink Admin</field>
-            <field name="model_id" ref="repeater.model_repeater_repeater"/>
-            <field name="domain_force">[(1,'=',1)]</field>
-            <field name="perm_unlink" eval="1"/>
-            <field name="perm_write" eval="0"/>
-            <field name="perm_read" eval="0"/>
-            <field name="perm_create" eval="0"/>
-            <field name="groups" eval="[(4, ref('base.group_system'))]"/>
-        </record>
-
-
-
-        <record id="repeater_depend_department" model="ir.rule">
+        <!-- <record id="repeater_depend_department" model="ir.rule">
             <field name="name">repeater_depend_department</field>
             <field name="model_id" ref="repeater.model_repeater_repeater"/>
-            <field name="domain_force">[('hcm_department_id','child_of',[user.hcm_department_id.id])]</field>
+            <field name="domain_force">[('hcm_department_id','child_of',user.hcm_department_id.id)]</field>
             <field name="perm_create" eval="0"/>
-        </record>
+        </record> -->
 
-    
+        <!-- <record id="repeater_depend_department_over_write_admin" model="ir.rule">
+            <field name="name">repeater_depend_department_over_write_admin</field>
+            <field name="model_id" ref="repeater.model_repeater_repeater"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4, ref('base.user_admin'))]"/>
+        </record> -->
+
 
     </data>
 </odoo>

@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_repeater_repeater_manager,access.repeater.repeater.manager,model_repeater_repeater,repeater.group_repeater_manager,1,1,1,1
+access_repeater_repeater_user,access.repeater.repeater.user,model_repeater_repeater,repeater.group_repeater_user,1,1,1,0
+access_repeater_category_manager,access.repeater.category.manager,model_repeater_category,repeater.group_repeater_manager,1,1,1,1
+access_repeater_category_user,access.repeater.category.user,model_repeater_category,repeater.group_repeater_user,1,1,1,0
+access_repeater_brand_manager,access.repeater.brand.manager,model_repeater_brand,repeater.group_repeater_manager,1,1,1,1
+access_repeater_brand_user,access.repeater.brand.user,model_repeater_brand,repeater.group_repeater_user,1,1,1,0
+access_repeater_model_manager,access.repeater.model.manager,model_repeater_model,repeater.group_repeater_manager,1,1,1,1
+access_repeater_model_user,access.repeater.model.user,model_repeater_model,repeater.group_repeater_user,1,1,1,0
+access_image_manager,access.repeater.image.manager,model_repeater_image,repeater.group_repeater_manager,1,1,1,1
+access_image_user,access.repeater.image.user,model_repeater_image,repeater.group_repeater_user,1,1,1,0
+access_repeater_department_manager,access_repeater_department_manager,model_repeater_department,repeater.group_repeater_manager,1,1,1,1
+access_repeater_department_user,access_repeater_department_user,model_repeater_department,repeater.group_repeater_user,1,1,1,0
+
+access_repeater_attachment_user,access_repeater_attachment_user,model_repeater_attachment,repeater.group_repeater_user,1,1,1,1

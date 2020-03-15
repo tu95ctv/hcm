@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 {
     'name': "repeater",
-    'summary': "Quản lý Repeater cho NET2",
-    'description': "Quản lý Repeater cho NET2",
+    'summary': "quan ly repeater",
+    'description': "",
     'author': "NDT",
     'website': "http://www.yourcompany.com",
     'category': 'Uncategorized',
@@ -17,7 +17,6 @@
         'views/repeater_views_full.xml',
         'views/department.xml',
         'views/user.xml',
-        'views/res_config_settings_views.xml',
 
     ],
     'demo': [

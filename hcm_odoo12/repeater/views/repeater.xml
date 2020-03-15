@@ -7,51 +7,52 @@
                 <form string="Product Template">
                     <header>
                         <button name="action_draft" type="object" string="Bản Thảo" class="btn-primary" states="begin,cancel" />
-                        <button name="action_confirm" type="object" class="btn-primary" string="Xác nhận" states="draft" />
-                        <button name="action_cancel" type="object" class="btn-primary" string="Xóa" states="draft,confirm" />
-                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm,cancel" />
+                        <button name="action_begin" type="object" class="btn-primary" string="Khởi Động" states="draft,working" />
+                        <button name="action_working" type="object" class="btn-primary" string="Đang Hoạt Động" states="begin" />
+                        <button name="action_fail" type="object" class="btn-primary" string="Hư hỏng" states="working" />
+                        <button name="action_cancel" type="object" class="btn-primary" string="Xóa" states="draft,begin,working,fail" />
+                        <field name="state" widget="statusbar" statusbar_visible="draft,begin,working,fail,cancel" />
                     </header>
                     <sheet>
                         <group>
-                            <group string="Đặc Điểm">
+                            <group>
                                 <field name="name" />
-                                <field name="working_state" />
                                 <field name="category_id" />
                                 <field name="brand_id" />
                                 <field name="model_id" />
                                 <field name="serial_number" />
-                                <field name="mang2g3g4g" />
-                                <field name="hcm_department_id" />
-                                <field name="note" />
-                            </group>
-                            <group string="Liên Hệ">
                                 <field name="address" />
+                            </group>
+                            <group>
                                 <field name="lat" />
                                 <field name="long" />
-                                <field name="partner_id" />
-                                <field name="phone" />
-                                <field name="dau_moi_hcm_id" />
-                                <field name="hcm_phone" />
-                                <field name="write_uid" />
-                                <field name="write_date" />
-                            </group>
-                            <group string="Ban Đầu">
-                                <field name="customer" />
-                                <field name="customer_phone" />
                                 <field name="ma_diem_den" />
                                 <field name="ma_pa_khach_hang" />
+                                <field name="mang2g3g4g" />
+                                <field name="partner_id" />
+                                <field name="phone" />
+                            </group>
+                            <group>
+                                <field name="hcm_department_id" />
+                                <field name="dau_moi_hcm_id" />
+                                <field name="hcm_phone" />
+                                <field name="customer_id" />
+                                <field name="customer_phone" />
                                 <field name="start_time" />
+                                <!-- <field name="bien_ban_xac_nhan" /> -->
                                 <field name="start_note" />
                             </group>
-                            <group string="Thu Hồi">
+                            <group>
                                 <field name="thu_hoi_time" />
                                 <field name="nguyen_nhan_thu_hoi" />
                                 <field name="nhan_vien_thu_hoi_id" />
                                 <field name="thu_hoi_phone" />
                                 <field name="don_vi_thu_hoi" />
+                                <field name="note" />
+                                <field name="write_uid" />
+                                <field name="write_date" />
                             </group>
                         </group>
-
                         <notebook>
                             <page name="image" string="Ảnh">
                                     <field name="image_ids">
@@ -60,6 +61,7 @@
                                         </tree>
                                     </field>
                             </page>
+
                             <page name="bien_ban_xac_nhan_ids" string="Biên bảng xác nhận">
                                     <field name="bien_ban_xac_nhan_ids">
                                         <form>
@@ -68,12 +70,17 @@
                                                 <field name="filedata" filename="name"/>
                                             </group>
                                         </form>
+
                                         <tree>
                                             <field name="name" />
                                             <field name="filedata" />
                                         </tree>
+
                                     </field>
                             </page>
+
+
+                            
                         </notebook>
                     </sheet>
                     <div class="oe_chatter">
@@ -89,9 +96,8 @@
             <field name="model">repeater.repeater</field>
             <field name="arch" type="xml">
                 <tree string="Product Template">
-                    <field name="name" />
                     <field name="state" />
-                    <field name="working_state" />
+                    <field name="name" />
                     <field name="hcm_department_id" />
                     <field name="category_id" />
                     <field name="brand_id" />
@@ -107,7 +113,7 @@
                     <field name="phone" />
                     <!-- <field name="dau_moi_hcm_id" />
                     <field name="hcm_phone" />
-                    <field name="customer" />
+                    <field name="customer_id" />
                     <field name="customer_phone" /> -->
                     <field name="start_time" />
                     <!-- <field name="bien_ban_xac_nhan" />
@@ -133,19 +139,22 @@
                     <field name="state" />
                     <field name="long" />
                     <field name="lat" />
+                    <!-- <field name="category" /> -->
                     <field name="category_id" />
                     <field name="brand_id" />
                     <field name="model_id" />
                     <field name="address" />
                     <field name="partner_id" />
-                    <group  string="Group By">
+                    <separator />
+                    <!-- <filter name="danxe" string="Dán xe" domain="[('loaiphuluc','=','danxe')]"/>
+					<filter name="lapframe" string="Lắp Frame" domain="[('loaiphuluc','=','lapframe')]"/> -->
+                    <group expand="0" string="Group By...">
                         <filter name="name" string="Tên Repeater" context="{'group_by':'name'}" />
-                        <filter name="state" string="Trạng thái" context="{'group_by':'state'}" />
-                        <filter name="working_state" string="Tình trạng hiện tại" context="{'group_by':'working_state'}" />
+                        <filter name="state" string="Loại Thiết Bị" context="{'group_by':'state'}" />
                         <filter name="brand_id" string="Hãng sản xuất" context="{'group_by':'brand_id'}" />
-                        <filter name="model_id" string="Model"  context="{'group_by':'model_id'}" />
-                        <filter name="partner_id" string="Nhân viên chuyên quản" context="{'group_by':'partner_id'}" />
-                        <filter name="hcm_department_id" string="Đài" context="{'group_by':'hcm_department_id'}" />
+                        <filter name="model" string="Model"  context="{'group_by':'model'}" />
+                        <filter name="partner_id" string="Nhân viên chuyên quản" context="{'group_by':'name'}" />
+                        <filter name="hcm_department_id" string="Đài" context="{'group_by':'name'}" />
                     </group>
                 </search>
             </field>
@@ -169,8 +178,7 @@
             <field name="view_id" ref="repeater_repeater_tree" />
             <field name="act_window_id" ref="repeater_act" />
         </record>
-        <menuitem id="repeater_menu" string="Repeater" name="Repeater" web_icon="repeater,static/img/logo.png" />
-        <menuitem id="sub_repeater_menu" string="Repeater" name="Repeater" parent="repeater_menu" action="repeater_act" />
-        <menuitem id="configuration_menu" string="Cấu Hình" name="Cấu Hình" parent="repeater_menu" sequence="100" groups="base.group_system" />
+        <menuitem id="new_template_menu" string="Repeater" name="Repeater" />
+        <menuitem id="sub_new_template_menu" string="Repeater" name="Repeater" parent="new_template_menu" action="repeater_act" />
     </data>
 </odoo>
