@@ -42,12 +42,10 @@ class Repeater(models.Model):
     dau_moi_hcm_id = fields.Many2one('res.partner','Đầu mối VTHCM')
     hcm_phone = fields.Char('SĐT VTHCM')
     
-    # customer_id = fields.Many2one('res.partner','Khách Hàng')
     customer = fields.Char('Khách Hàng')
     customer_phone = fields.Char(string="SĐT KH")
     
     start_time = fields.Date('Thời gian thực hiện')
-    # bien_ban_xac_nhan = fields.Char('Biên bản xác nhận')
     bien_ban_xac_nhan_ids = fields.One2many('repeater.attachment', 'repeater_id')
     start_note = fields.Text('Ghi chú nghiệm thu')
     thu_hoi_time = fields.Datetime('Thời gian thu hồi')
@@ -56,8 +54,6 @@ class Repeater(models.Model):
     thu_hoi_phone = fields.Char('SĐT NVTH')
     don_vi_thu_hoi = fields.Char('Đơn vị thu hồi')
     note = fields.Text('Ghi chú', track_visibility='onchange')
-
-    # department_id = fields.Many2one('repeater.department', default= lambda self: self.department_id)
     hcm_department_id = fields.Many2one('repeater.department', string="Đài", default= lambda self: self.hcm_department_id)
     
     def action_draft(self):
@@ -65,18 +61,6 @@ class Repeater(models.Model):
 
     def action_confirm(self):
         return self.write({'state': 'confirm'})
-    
-    # def action_begin(self):
-    #     return self.write({'state': 'begin'})
-    
-    
-    # def action_working(self):
-    #     return self.write({'state': 'working'})
-
-    
-    # def action_fail(self):
-    #     return self.write({'state': 'fail'})
-    
     
     def action_cancel(self):
         return self.write({'state': 'cancel'})
@@ -87,8 +71,6 @@ class Repeater(models.Model):
             self.partner_id.write({'phone': vals['phone']})
         if 'hcm_phone' in vals:
             self.dau_moi_hcm_id.write({'phone': vals['phone']})
-        # if 'customer_phone' in vals:
-        #     self.customer.write({'phone': vals['customer_phone']})
 
     @api.model
     def create(self, vals):
@@ -100,25 +82,7 @@ class Repeater(models.Model):
         rs = super(Repeater, self).write(vals)
         for rec in self:
             rec.update_related_partner(vals)
-            # if self.env['ir.config_parameter'].sudo().get_param('repeater.is_send_mail_change_repeater'):
-            #     if 'state' in vals:
-            #         mail_template_id = self.env.ref('repeater.repeater_change_state_mail_template')
-            #         mail_template_id.send_mail(rec.id, force_send=True, raise_exception=True, email_values={'email_to': 'ductu19871@gmail.com'})
         return rs
-
-    @api.model
-    def test_code(self):
-        mme = self.env['mail.message']
-        print ('*****dir(mme)',dir(mme))
-        print ('*****mme.__dict__****',mme.__dict__)
-                 
-    # def message_post(self, **kwargs):
-    #     # OVERRIDE
-    #     # /!\ 'default_res_id' in self._context is used to don't process attachment when using a form view.
-    #     res = super(Repeater, self).message_post(**kwargs)
-    #     print ('****res****', res)
-    #     print (aa)
-    #     return res
     
     def name_get(self):
         result = []

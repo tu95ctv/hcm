@@ -7,9 +7,7 @@ from odoo import api, fields, models, _
 class ResConfigSettings(models.TransientModel):
     _inherit = 'res.config.settings'
 
-    # to_email_repeater_change = fields.Many2many('res.parter','res_config_partner_relate','config_id', 'partner_id')
-    # to_email_repeater_change = fields.Many2one('res.parter')
-    to_email_repeater_change_id = fields.Many2one('res.partner')
+    to_email_repeater_change_id = fields.Many2one('res.partner') # chưa xài
     is_send_mail_change_repeater = fields.Boolean('Kích hoạt gửi mail')
 
     @api.model

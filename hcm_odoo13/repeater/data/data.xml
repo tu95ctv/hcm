@@ -67,18 +67,17 @@
         <field name="groups_id" eval="[(4,ref('base.group_system'))]" />
 
     </record> 
-
+<!-- 
     <record id="ir_repeater_test_code" model="ir.cron">
         <field name="name">ir_repeater_test_code</field>
         <field name="model_id" ref="repeater.model_repeater_repeater"/>
-        <!-- <field name="user_id" ref="base.user_root"/> -->
         <field name="state">code</field>
         <field name="code">model.test_code()</field>
         <field name="interval_number">1</field>
         <field name="interval_type">hours</field>
         <field name="numbercall">-1</field>
         <field name="doall" eval="False"/>
-    </record>
+    </record> -->
 
 
 
