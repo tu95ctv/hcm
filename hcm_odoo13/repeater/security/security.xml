@@ -35,7 +35,7 @@
             <field name="groups" eval="[(4, ref('group_repeater_user'))]"/>
         </record>
 
-        <record id="repeater_unlink" model="ir.rule">
+        <record id="repeater_unlink_admin" model="ir.rule">
             <field name="name">Repeater Unlink Admin</field>
             <field name="model_id" ref="repeater.model_repeater_repeater"/>
             <field name="domain_force">[(1,'=',1)]</field>
