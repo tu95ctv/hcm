@@ -70,24 +70,27 @@ class Repeater(models.Model):
         if 'phone' in vals:
             self.partner_id.write({'phone': vals['phone']})
         if 'hcm_phone' in vals:
-            self.dau_moi_hcm_id.write({'phone': vals['phone']})
+            self.dau_moi_hcm_id.write({'phone': vals['hcm_phone']})
 
     @api.model
     def create(self, vals):
         rec = super(Repeater, self).create(vals)
-        rec.update_related_partner(vals)
+        rec.sudo().update_related_partner(vals)
         return rec
 
     def write(self, vals):
         rs = super(Repeater, self).write(vals)
         for rec in self:
-            rec.update_related_partner(vals)
+            rec.sudo().update_related_partner(vals)
         return rs
     
     def name_get(self):
         result = []
         for r in self:
-            name = (('Tên: ' + r.name + ' ') if r.name else '') + 'Đ/c: ' +  r.address
+            
+            name = (('Tên: ' + r.name + ' ') if r.name else '') + (('Đ/c: ' +  r.address) if r.address else '')
+            if not name:
+                name = 'New'
             result.append((r.id, name))
         return result
 
