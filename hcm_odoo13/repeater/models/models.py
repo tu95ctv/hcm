@@ -5,7 +5,6 @@ from odoo import models, fields, api
 class ResUsers(models.Model):
     _inherit = 'res.users'
 
-    # department_id = fields.Many2one('repeater.department')
     hcm_department_id = fields.Many2one('repeater.department', string="Đài")
 
 class Department(models.Model):
@@ -66,7 +65,6 @@ class Repeater(models.Model):
         return self.write({'state': 'cancel'})
 
     def update_related_partner(self, vals):
-        
         if 'phone' in vals:
             self.partner_id.write({'phone': vals['phone']})
         if 'hcm_phone' in vals:
@@ -96,25 +94,27 @@ class Repeater(models.Model):
 
     def _message_log(self, **kwargs):
         mail_message_ids = super(Repeater, self)._message_log(**kwargs)
-        for mme_id in mail_message_ids:
-            char_track = []
-            for track in mme_id.tracking_value_ids:
-                old_value = track.get_old_display_value()
-                old_value = ' '.join(old_value)
-                new_value = track.get_new_display_value()
-                new_value = ' '.join(new_value)
-                value_track = track.field + ': ' + ( old_value + '->'  if old_value else '') + new_value
-                char_track.append(value_track)
-            char_track = '<br></br>'.join(char_track)
-            subject = 'Thông báo thay đổi Repeater %s'%self.name_get()[0][1]
-            mail_id = self.env['mail.mail'].create({
-                'subject':subject,
-                # 'email_to':'ductu19871@gmail.com',
-                'recipient_ids':[(6,0,self.hcm_department_id.manager_ids.ids)],
-                'mail_message_id':mme_id.id,
-                'body_html':char_track,
-                })
-            mail_id.send()
+        is_send_mail_change_repeater = self.env["ir.config_parameter"].sudo().get_param("is_send_mail_change_repeater")
+        if is_send_mail_change_repeater:
+            for mme_id in mail_message_ids:
+                char_track = []
+                for track in mme_id.tracking_value_ids:
+                    old_value = track.get_old_display_value()
+                    old_value = ' '.join(old_value)
+                    new_value = track.get_new_display_value()
+                    new_value = ' '.join(new_value)
+                    value_track = track.field + ': ' + ( old_value + '->'  if old_value else '') + new_value
+                    char_track.append(value_track)
+                char_track = '<br></br>'.join(char_track)
+                subject = 'Thông báo thay đổi Repeater %s'%self.name_get()[0][1]
+                recipient_ids = [(6,0,self.hcm_department_id.manager_ids.ids)] if self.hcm_department_id.manager_ids.ids else False
+                mail_id = self.env['mail.mail'].create({
+                    'subject':subject,
+                    'recipient_ids':recipient_ids,
+                    'mail_message_id':mme_id.id,
+                    'body_html':char_track,
+                    })
+                mail_id.send()
         return mail_message_ids
 
 
